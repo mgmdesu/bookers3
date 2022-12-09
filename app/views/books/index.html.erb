@@ -1,55 +1,8 @@
 <h2>User info</h2>
-  <%= image_tag @user.get_profile_image(100,100) %>
-  <table>
-    <tbody>
-      <tr>
-        <th>name</th>
-        <th><%= @user.name %></th>
-      </tr>
-      <tr>
-        <th>introduction</th>
-        <th><%= @user.introduction %></th>
-      </tr>
-    </tbody>
-  </table>
-  <% if @user == current_user %>
-    <%= link_to edit_user_path(@user), class: "btn btn-outline-secondary btn-block" do %>
-      <i class="fas fa-user-cog"></i>
-    <% end %>
-  <% end %>
+  <%= render 'users/user_info', user: @user %>
 
 <h2>New Book</h2>
-  <%= form_with model:@book do |f| %>
-    <h4>Title</h4>
-      <%= f.text_field :title %>
-    <h4>Opinion</h4>
-      <%= f.text_area :body %><br>
-    <%= f.submit 'Create Book' %>
-  <% end %>
+  <%= render 'new_book', book: @book %>
   
 <h2>Books</h2>
-  <table>
-    <thead>
-      <tr>
-        <th></th>
-        <th>Title</th>
-        <th>Opinion</th>
-      </tr>
-    </thead>
-    
-    <% @books.each do |book| %>
-    <tbody>
-      <tr>
-        <td>
-          <%= image_tag book.user.get_profile_image(50,50) %>
-        </td>
-        <td>
-          <%= link_to book_path(book.id) do %>
-            <%= book.title %>
-          <% end %>
-          </td>
-        <td><%= book.body %></td>
-      </tr>
-    </body>
-  </table>
-  <% end %>
+  <%= render 'index', books: @books %>
